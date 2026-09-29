@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,12 @@ public class NbQuickCheck {
   public static void preOrder(Map<Integer, List<Integer>> tree, int root) {
     if(!tree.containsKey(root)) {
       return;
+    }
+
+    System.out.println(root);
+
+    for(int child : tree.getOrDefault(root, new ArrayList<>())){
+      preOrder(tree, child);
     }
   }
 
