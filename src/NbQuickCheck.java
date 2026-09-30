@@ -40,7 +40,18 @@ public class NbQuickCheck {
    * @return the minimum value in the tree or Integer.MAX_VALUE if root is null
    */
   public static int minVal(Node<Integer> root) {
-    return -1;
+    int minimumValue = Integer.MAX_VALUE;
+    if (root == null) return minimumValue;
+    // Compare the root's value with the largest possible number.
+    minimumValue = Math.min(minimumValue,root.value);
+
+    // If this root has no children, return only its value compared.
+    if (root.children == null) return minimumValue;
+    // For each child, check the smallest value its children have, and compare it with this node's smallest value.
+    for (Node<Integer> child : root.children) minimumValue = Math.min(minimumValue,minVal(child));
+
+    // Return the smallest value among itself and its children.
+    return minimumValue;
   }
   
 }
