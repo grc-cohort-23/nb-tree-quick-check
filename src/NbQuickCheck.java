@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class NbQuickCheck {
 
@@ -11,9 +13,23 @@ public class NbQuickCheck {
    * @param root the root node to start traversal from
    */
   public static void preOrder(Map<Integer, List<Integer>> tree, int root) {
-    if(!tree.containsKey(root)) {
-      return;
+    if(!tree.containsKey(root)) return;
+    Stack<Integer> stack = new Stack<>();
+    
+    stack.add(root);
+    while (!stack.isEmpty()) {
+      Integer node = stack.pop();
+      // Print pre-order
+      System.out.println(node);
+      // Get the children of the current node
+      List<Integer> children = tree.getOrDefault(node, new ArrayList<>());
+      // For each child, in reverse order
+      for (int i=children.size()-1;i>=0; i--) {
+        // Add it to the stack
+        stack.add(children.get(i));
+      }
     }
+
   }
 
   /**
