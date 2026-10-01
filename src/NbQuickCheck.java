@@ -14,6 +14,11 @@ public class NbQuickCheck {
     if(!tree.containsKey(root)) {
       return;
     }
+    preOrder(tree, root);
+    for(Integer child : tree.get(root)){
+      System.out.println(child);
+
+    }
   }
 
   /**
@@ -24,7 +29,18 @@ public class NbQuickCheck {
    * @return the minimum value in the tree or Integer.MAX_VALUE if root is null
    */
   public static int minVal(Node<Integer> root) {
-    return -1;
+    if(root == null){
+      return Integer.MAX_VALUE;
+    }
+    int minNode = root.value;
+
+    for(Node<Integer> child : root.children){
+      if (child.value < minNode){
+        minNode=child.value;
+      }
+      minVal(child);
+    }
+    return minNode;
   }
   
 }
