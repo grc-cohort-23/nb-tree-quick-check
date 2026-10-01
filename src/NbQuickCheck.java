@@ -11,9 +11,13 @@ public class NbQuickCheck {
    * @param root the root node to start traversal from
    */
   public static void preOrder(Map<Integer, List<Integer>> tree, int root) {
-    if(!tree.containsKey(root)) {
-      return;
-    }
+    if(!tree.containsKey(root)) return;
+
+      System.out.println(root);
+      for (Integer child : tree.get(root)) {
+        preOrder(tree, child);
+      }
+    
   }
 
   /**
@@ -24,7 +28,16 @@ public class NbQuickCheck {
    * @return the minimum value in the tree or Integer.MAX_VALUE if root is null
    */
   public static int minVal(Node<Integer> root) {
-    return -1;
+    if (root == null) { return Integer.MAX_VALUE;}
+    int min = root.value;
+    for (Node<Integer> child : root.children) {
+      int childMin = minVal(child);
+      
+      if (childMin < min) {
+        min = childMin;
+      }
+    }
+    return min;
   }
   
 }
