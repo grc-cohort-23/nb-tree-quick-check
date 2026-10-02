@@ -12,8 +12,17 @@ public class NbQuickCheck {
    */
   public static void preOrder(Map<Integer, List<Integer>> tree, int root) {
     if(!tree.containsKey(root)) {
-      return;
+       return;
     }
+    //we visit current node first for preorder 
+    System.out.println(root);
+
+    //get children for each current node 
+    for(int child : tree.get(root)){
+      //then recusre through for each child and it's extended children
+      preOrder(tree, child);
+    }
+
   }
 
   /**
@@ -24,7 +33,29 @@ public class NbQuickCheck {
    * @return the minimum value in the tree or Integer.MAX_VALUE if root is null
    */
   public static int minVal(Node<Integer> root) {
-    return -1;
+    // if root is null return Integer.Max_Value as stated above
+    if(root == null){
+      return Integer.MAX_VALUE;
+    }
+    //find minimum in left subtree and store as an integer
+    // int leftTree = minVal(root.left);
+    // //find minimum in right 
+    // int rightTree = minVal(root.right);
+    
+    //restart
+    // assume root is minimum, then we compare all children to min 0
+    int min = root.value;
+    //check each child
+    for(Node<Integer> child : root.children){
+
+      //save the minimum child to compare back to min
+      int childMin = minVal(child);
+
+      if(childMin<min){
+        min = childMin;
+      }
+    }
+    return min;
   }
-  
+
 }
